@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+	<button id="greenPressed" class="btn btn-default">Green</button>
+	<button id="bluePressed" class="btn btn-default">Blue</button>
+	<button id="redPressed" class="btn btn-default">Red</button>
+
+</body>
+</html>
+
+
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$("#greenPressed").on("click", function(){
+		socket.emit("webClickColor", "green");
+	});
+	$("#bluePressed").on("click", function(){
+		socket.emit("webClickColor", "blue");
+	});
+	$("#redPressed").on("click", function(){
+		socket.emit("webClickColor", "red");
+	});
+</script>
+
+<script>
+  var socket = io.connect('http://localhost:3000');
+  socket.on("changeBackgroundPC", function(color){
+  	console.log("The color is: " + color);
+  	$("body").css("background-color", color)
+  });
+</script>
